@@ -43,7 +43,7 @@ apiClient.interceptors.request.use((config) => {
 // Calls the refresh endpoint directly via plain axios, never apiClient,
 // so a failed refresh can never re-trigger apiClient's own response
 // interceptor and loop.
-async function refreshAccessToken(): Promise<string> {
+export async function refreshAccessToken(): Promise<string> {
   const refreshToken = getRefreshToken();
 
   if (!refreshToken) {
