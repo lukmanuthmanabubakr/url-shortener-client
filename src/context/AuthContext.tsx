@@ -1,13 +1,11 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { AxiosError } from 'axios';
-import { apiClient, refreshAccessToken } from '../api/client';
+import { apiClient, getRefreshPromise } from '../api/client';
 import {
   getRefreshToken,
   setAccessToken,
   setRefreshToken,
   clearTokens,
 } from '../api/tokenStore';
-import type { ApiErrorBody } from '../api/urls';
 
 interface AuthResponse {
   user: { id: string; email: string };
@@ -39,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       try {
-        await refreshAccessToken();
+        await getRefreshPromise();
         setIsAuthenticated(true);
       } catch {
         clearTokens();
