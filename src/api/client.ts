@@ -66,7 +66,7 @@ export async function refreshAccessToken(): Promise<string> {
 // than each triggering their own, which would race against token rotation.
 let refreshPromise: Promise<string> | null = null;
 
-function getRefreshPromise(): Promise<string> {
+export function getRefreshPromise(): Promise<string> {
   if (!refreshPromise) {
     refreshPromise = refreshAccessToken().finally(() => {
       refreshPromise = null;
